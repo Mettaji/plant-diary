@@ -1,30 +1,27 @@
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
-from datetime import datetime
 
-st.set_page_config(page_title="Wat Buddha Dhamma Plant Diary", page_icon="🌿")
-st.set_page_config(layout="centered", initial_sidebar_state="collapsed")
+# 1. Establish the connection FIRST
+conn = st.connection("gsheets", type=GSheetsConnection)
 
-
-# Temporary Setup Script - Run this once to format your sheet
+# 2. Define your headers
 headers = [
     "ID", "Common Name", "Scientific Name", "Max Height (m)", 
     "Max Width (m)", "Soil Type", "Light", "Fertilizer", 
     "Growth Habit", "Flowering Season", "Notes"
 ]
 
+# 3. Sidebar tool to fix the sheet
 if st.sidebar.button("🔨 Initialize Sheet Headers"):
+    # Create an empty row with these headers
     df_headers = pd.DataFrame(columns=headers)
+    
+    # In this library, we use .update() with the data directly
     conn.update(worksheet="Plants", data=df_headers)
-    st.sidebar.success("Headers updated in Google Sheets!")
+    st.sidebar.success("Headers updated! Check your Google Sheet.")
 
-
-
-# Connect to Google Sheets
-conn = st.connection("gsheets", type=GSheetsConnection)
-
-st.title("🌿 Property Plant Diary")
+st.title("🌿 Wat Buddha Dhamma Plant Diary")
 
 menu = ["View Diary", "Add New Plant", "Log Growth"]
 choice = st.sidebar.selectbox("Navigation", menu)
