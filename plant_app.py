@@ -177,7 +177,7 @@ elif choice == "Add New Plant":
                 "Low Phosphorous": "✅" if low_phos else "",
                 "Fertilizer": fert, 
                 "Flowering": ", ".join(flowering), 
-                "Notes": notes
+                "Notes": notes,
                 "Photo Link": image_link  # Now we add the result here
 
             }])
