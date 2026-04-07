@@ -160,7 +160,7 @@ elif choice == "Add New Plant":
         if st.form_submit_button("Save to Diary"):
 
            # 1. Handle the Image Upload FIRST
-           if uploaded_file is not None:
+        if uploaded_file is not None:
                image_link = upload_to_drive(uploaded_file, '1ko9MzM8FdaEGEu2KmgaZObYcrEuKDOKY')
            else:
                image_link = "No Image"
@@ -178,6 +178,7 @@ elif choice == "Add New Plant":
                 "Fertilizer": fert, 
                 "Flowering": ", ".join(flowering), 
                 "Notes": notes
+                "Photo Link": image_link  # Now we add the result here
 
             }])
             
