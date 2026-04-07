@@ -158,6 +158,13 @@ elif choice == "Add New Plant":
         
         # --- SUBMIT LOGIC ---
         if st.form_submit_button("Save to Diary"):
+
+           # 1. Handle the Image Upload FIRST
+           if uploaded_file is not None:
+               image_link = upload_to_drive(uploaded_file, '1ko9MzM8FdaEGEu2KmgaZObYcrEuKDOKY')
+           else:
+               image_link = "No Image"
+           
             plant_id = datetime.now().strftime("%Y%m%d%H%M")
             new_row = pd.DataFrame([{
                 "ID": plant_id, 
@@ -172,15 +179,6 @@ elif choice == "Add New Plant":
                 "Flowering": ", ".join(flowering), 
                 "Notes": notes
 
-                if uploaded_file is not None:
-                    # Replace 'YOUR_FOLDER_ID' with the long string of letters/numbers 
-                    # found in the URL of your Google Drive folder
-                    image_link = upload_to_drive(uploaded_file, '1ko9MzM8FdaEGEu2KmgaZObYcrEuKDOKY')
-                else:
-                    image_link = "No Image"
-
-# Add this to your data dictionary
-"Photo Link": image_link,
             }])
             
             st.write("Data Preview:", new_row)
