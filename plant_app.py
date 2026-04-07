@@ -117,18 +117,9 @@ elif choice == "Add New Plant":
         notes = st.text_area("Notes")
         
 
-     # 1. Inside your form (the uploader)
-        with st.form("new_plant_form", clear_on_submit=True):
-            # ... all your existing fields ...
-            uploaded_file = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"])
-            
-            submit = st.form_submit_button("Save to Diary")
-            if submit:
-                # Save your data to the Google Sheet here
-                if uploaded_file:
-                    st.session_state['last_upload'] = uploaded_file
-                st.success("Data saved!")
-
+        # The widget that accepts the file
+        uploaded_file = st.file_uploader("Attach Photo", type=["jpg", "jpeg", "png"])
+        
         
         # --- SUBMIT LOGIC ---
         if st.form_submit_button("Save to Diary"):
@@ -149,6 +140,8 @@ elif choice == "Add New Plant":
             
             st.write("Data Preview:", new_row)
             st.success(f"Details for {name} saved to session!")
+
+            
 
   # Optional: Show a small preview of the image once selected
        # 2. Outside/Below the form (the preview)
