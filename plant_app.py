@@ -121,10 +121,6 @@ elif choice == "Add New Plant":
         st.markdown("**Plant Gallery**")
         uploaded_file = st.file_uploader("Upload photo", type=["jpg", "jpeg", "png"])
 
-        # Optional: Show a small preview of the image once selected
-        if uploaded_file is not None:
-            st.image(uploaded_file, caption="Preview", width=200)
-
         
         # --- SUBMIT LOGIC ---
         if st.form_submit_button("Save to Diary"):
@@ -145,6 +141,10 @@ elif choice == "Add New Plant":
             
             st.write("Data Preview:", new_row)
             st.success(f"Details for {name} saved to session!")
+
+  # Optional: Show a small preview of the image once selected
+        if uploaded_file is not None:
+            st.image(uploaded_file, caption="Preview", width=200)
 
 
 # ------------------------------------------
