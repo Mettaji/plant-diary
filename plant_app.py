@@ -104,7 +104,7 @@ elif choice == "Add New Plant":
         fert = st.text_input("Fertilizer Req.", value="")
 
         # Create the binary tick box
-        low_phos = st.checkbox("Low Phosphorus Requirement", value=False)
+        low_phos = st.checkbox("Low Phosphorus", value=False)
         
 
         # --- CHARACTERISTICS ---
