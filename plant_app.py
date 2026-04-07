@@ -97,7 +97,7 @@ elif choice == "Add New Plant":
         # --- ENVIRONMENTAL NEEDS ---
         col5, col6 = st.columns(2)
         with col5:
-            soil = st.selectbox("Soil Type", ["Sandstone/Sandy", "Clay", "Loam", "Rocky/Shallow"])
+            soil = st.selectbox("Soil Type", ["Sandy", "Clay", "Loam", "Rocky / Shallow", "Rich / Organic])
         with col6:
             light = st.select_slider("Light", options=["Full Shade", "Mostly shade", "Part shade", "Full sun + shade from afternoon sun", "Full Sun"])
         
