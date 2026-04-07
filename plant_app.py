@@ -47,18 +47,26 @@ elif choice == "Add New Plant":
             max_h = st.number_input("Max Height (m)", min_value=0.0, step=0.5)
             max_w = st.number_input("Max Width (m)", min_value=0.0, step=0.5)
 
-        # Middle Row: Requirements
+       # Middle Row: Requirements
         col3, col4 = st.columns(2)
         with col3:
             soil = st.selectbox("Soil Type", ["Sandstone/Sandy", "Clay", "Loam", "Rocky/Shallow"])
             light = st.select_slider("Light", options=["Full Shade", "Part Shade", "Full Sun"])
         with col4:
             fert = st.text_input("Fertilizer", value="Low Phosphorus (Native)")
-            flowering = st.multiselect("Flowering Season", ["Spring", "Summer", "Autumn", "Winter"])
+            
+            # This is the updated Multi-Select for Flowering
+            flowering = st.multiselect(
+                "Flowering Season(s)", 
+                ["Spring", "Summer", "Autumn", "Winter", "Opportunistic/Year-round"],
+                help="Select all that apply"
+            )
 
         # Bottom Row: Habits & Notes
         habit = st.text_area("Growth Habits", placeholder="e.g. Bird attracting, fire-tolerant, fast-growing")
-        notes = st.text_area("Initial Planting Notes")
+        
+        # We join the list of seasons into a single string so it fits in one Google Sheet cell
+        flowering_string = ", ".join(flowering)
 
         if st.form_submit_button("Save to Diary"):
             # Create a unique ID based on the current time
