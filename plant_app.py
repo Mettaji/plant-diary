@@ -106,7 +106,7 @@ elif choice == "Add New Plant":
 
         # --- CHARACTERISTICS ---
         flowering = st.multiselect("Flowering Season(s)", ["Spring", "Summer", "Autumn", "Winter", "Year-round"])
-        habit = st.text_area("Growth Habits")
+        habit = st.text_input("Growth Habits")
         
 
         # --- FIELD NOTES ---
