@@ -115,6 +115,15 @@ elif choice == "Add New Plant":
         # --- FIELD NOTES ---
         st.markdown("**Field Notes**")
         notes = st.text_area("Notes")
+        
+
+        # --- IMAGE UPLOAD SECTION ---
+        st.markdown("**Plant Gallery**")
+        uploaded_file = st.file_uploader("Upload photo", type=["jpg", "jpeg", "png"])
+
+        # Optional: Show a small preview of the image once selected
+        if uploaded_file is not None:
+        st.image(uploaded_file, caption="Preview", width=200)
 
         
         # --- SUBMIT LOGIC ---
