@@ -24,7 +24,7 @@ if choice == "View Collection":
     st.subheader("Current Species on Property")
     try:
         # Read the 'Plants' sheet
-        df = conn.read(worksheet="Plants")
+        df = conn.read()
         if df.empty:
             st.info("The diary is empty. Head to 'Add New Plant' to start your catalog.")
         else:
