@@ -6,6 +6,21 @@ from datetime import datetime
 st.set_page_config(page_title="Wat Buddha Dhamma Plant Diary", page_icon="🌿")
 st.set_page_config(layout="centered", initial_sidebar_state="collapsed")
 
+
+# Temporary Setup Script - Run this once to format your sheet
+headers = [
+    "ID", "Common Name", "Scientific Name", "Max Height (m)", 
+    "Max Width (m)", "Soil Type", "Light", "Fertilizer", 
+    "Growth Habit", "Flowering Season", "Notes"
+]
+
+if st.sidebar.button("🔨 Initialize Sheet Headers"):
+    df_headers = pd.DataFrame(columns=headers)
+    conn.update(worksheet="Plants", data=df_headers)
+    st.sidebar.success("Headers updated in Google Sheets!")
+
+
+
 # Connect to Google Sheets
 conn = st.connection("gsheets", type=GSheetsConnection)
 
