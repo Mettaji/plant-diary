@@ -10,12 +10,13 @@ from googleapiclient.http import MediaIoBaseUpload
 import io
 
 def upload_to_drive(file, folder_id):
-    # Path to the JSON key you downloaded
-    SERVICE_ACCOUNT_FILE = 'path/to/your/key.json' 
+   # 1. Pull the credentials directly from Streamlit Secrets
+    creds_dict = st.secrets["google_drive"]
     SCOPES = ['https://www.googleapis.com/auth/drive.file']
 
-    creds = service_account.Credentials.from_service_account_file(
-        SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    # 2. Create credentials from the dictionary instead of a file
+    creds = service_account.Credentials.from_service_account_info(
+        creds_dict, scopes=SCOPES)
     
     drive_service = build('drive', 'v3', credentials=creds)
 
