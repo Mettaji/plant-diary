@@ -74,20 +74,16 @@ elif choice == "Add New Plant":
         with col2:
             sci_name = st.text_input("Scientific Name", placeholder="e.g. Banksia serrata")
         
-        st.write("") 
 
         # --- PHYSICAL DIMENSIONS ---
-        st.markdown("**Mature Dimensions**")
         col3, col4 = st.columns(2)
         with col3:
             max_h = st.number_input("Max H (m)", min_value=0.0, step=0.1)
         with col4:
             max_w = st.number_input("Max W (m)", min_value=0.0, step=0.1)
         
-        st.write("") 
 
         # --- ENVIRONMENTAL NEEDS ---
-        st.markdown("**Growing Conditions**")
         col5, col6 = st.columns(2)
         with col5:
             soil = st.selectbox("Soil Type", ["Sandstone/Sandy", "Clay", "Loam", "Rocky/Shallow"])
@@ -96,20 +92,16 @@ elif choice == "Add New Plant":
         
         fert = st.text_input("Fertilizer", value="Low Phosphorus (Native)")
         
-        st.write("") 
 
         # --- CHARACTERISTICS ---
-        st.markdown("**Habits & Seasonality**")
         flowering = st.multiselect("Flowering Season(s)", ["Spring", "Summer", "Autumn", "Winter", "Year-round"])
         habit = st.text_area("Growth Habits", placeholder="e.g. Bird attracting, fire-tolerant")
         
-        st.write("") 
 
         # --- FIELD NOTES ---
         st.markdown("**Field Notes**")
         notes = st.text_area("Initial Planting Notes", placeholder="e.g. Located near the North tank")
 
-        st.write("---") 
         
         # --- SUBMIT LOGIC ---
         if st.form_submit_button("Save to Diary"):
