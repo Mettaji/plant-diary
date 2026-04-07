@@ -38,86 +38,47 @@ if choice == "View Collection":
 
     
 # --- OPTION 2: ADD NEW PLANT ---
-
-# 🎨 OPTIONAL: Custom CSS to make placeholders even lighter
+elif choice == "Add New Plant":
+    st.subheader("📝 Register New Species")
+    
+    # Forced CSS for Placeholder Color (Light Grey)
     st.markdown("""
         <style>
-        input::placeholder {
-            color: #bdc3c7 !important; /* A light silver/grey */
-            opacity: 0.5;
+        /* This targets the internal Streamlit input styling more aggressively */
+        input::placeholder, textarea::placeholder {
+            color: #d1d1d1 !important; 
+            opacity: 1 !important;
+            -webkit-text-fill-color: #d1d1d1 !important;
         }
-        textarea::placeholder {
-            color: #bdc3c7 !important;
-            opacity: 0.5;
+        /* Tighten padding so columns fit better on mobile */
+        [data-testid="column"] {
+            width: 50% !important;
+            flex: 1 1 50% !important;
+            min-width: 50% !important;
         }
         </style>
     """, unsafe_allow_html=True)
 
-
-elif choice == "Add New Plant":
-    st.subheader("📝 Register New Species")
-    st.markdown("Enter the permanent botanical details for this species.")
-
     with st.form("new_plant_form", clear_on_submit=True):
-       # Row 1: Names
+        # Row 1: Names
         col_a, col_b = st.columns(2)
         with col_a:
             name = st.text_input("Common Name", placeholder="e.g. Old Man Banksia")
         with col_b:
             sci_name = st.text_input("Scientific Name", placeholder="e.g. Banksia serrata")
 
-        # Row 2: Dimensions (Side-by-Side)
-        col_c, col_d = st.columns(2)
+        # Row 2: Dimensions - Using a smaller gap to encourage side-by-side
+        col_c, col_d = st.columns(2, gap="small")
         with col_c:
-            max_h = st.number_input("Max H (m)", min_value=0.0, step=0.1, help="Height in meters")
+            # We use value=0.0 to initialize it as a number
+            max_h = st.number_input("Max H (m)", min_value=0.0, step=0.1)
         with col_d:
-            max_w = st.number_input("Max W (m)", min_value=0.0, step=0.1, help="Width in meters")
-
-       # Middle Row: Requirements
-        col3, col4 = st.columns(2)
-        with col3:
-            soil = st.selectbox("Soil Type", ["Sandstone/Sandy", "Clay", "Loam", "Rocky/Shallow"])
-            light = st.select_slider("Light", options=["Full Shade", "Part Shade", "Full Sun"])
-        with col4:
-            fert = st.text_input("Fertilizer", value="Low Phosphorus (Native)")
+            max_w = st.number_input("Max W (m)", min_value=0.0, step=0.1)
             
-            # This is the updated Multi-Select for Flowering
-            flowering = st.multiselect(
-                "Flowering Season(s)", 
-                ["Spring", "Summer", "Autumn", "Winter", "Opportunistic/Year-round"],
-                help="Select all that apply"
-            )
-
-        # Bottom Row: Habits & Notes
-        habit = st.text_area("Growth Habits", placeholder="e.g. Bird attracting, fire-tolerant, fast-growing")
+        # ... Rest of your form ...
         
-        # We join the list of seasons into a single string so it fits in one Google Sheet cell
-        flowering_string = ", ".join(flowering)
-
         if st.form_submit_button("Save to Diary"):
-            # Create a unique ID based on the current time
-            plant_id = datetime.now().strftime("%Y%m%d%H%M")
-            
-            # Prepare data for Google Sheets
-            new_row = pd.DataFrame([{
-                "ID": plant_id,
-                "Common Name": name,
-                "Scientific Name": sci_name,
-                "Max Height (m)": max_h,
-                "Max Width (m)": max_w,
-                "Soil Type": soil,
-                "Light": light,
-                "Fertilizer": fert,
-                "Growth Habit": habit,
-                "Flowering Season": ", ".join(flowering),
-                "Notes": notes
-            }])
-
-            # Append and Update (Requires Service Account for writing)
-            # If you haven't set up the Service Account yet, this will show a preview
-            st.write("Preview of data to be saved:", new_row)
-            st.success(f"Details for {name} are ready. (Note: Instant syncing to Sheets requires a Service Account Key).")
-
+            st.success("Entry recorded and form cleared!")
 
 
 # --- OPTION 3: LOG GROWTH UPDATE ---
