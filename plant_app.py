@@ -99,7 +99,7 @@ elif choice == "Add New Plant":
         with col5:
             soil = st.selectbox("Soil Type", ["Sandstone/Sandy", "Clay", "Loam", "Rocky/Shallow"])
         with col6:
-            light = st.select_slider("Light", options=["Shade", "Mostly shade", "Part shade", "Full Sun"])
+            light = st.select_slider("Light", options=["Full Shade", "Mostly shade", "Part shade", "Full sun + shade from afternoon sun", "Full Sun"])
         
         fert = st.text_input("Fertilizer Req.", value="")
 
