@@ -89,9 +89,9 @@ elif choice == "Add New Plant":
         # --- PHYSICAL DIMENSIONS ---
         col3, col4 = st.columns(2)
         with col3:
-            max_h = st.number_input("Max H (m)", min_value=0.0, step=0.25)
+            max_h = st.number_input("Mature H (m)", min_value=0.0, step=0.25)
         with col4:
-            max_w = st.number_input("Max W (m)", min_value=0.0, step=0.25)
+            max_w = st.number_input("Mature W (m)", min_value=0.0, step=0.25)
         
 
         # --- ENVIRONMENTAL NEEDS ---
@@ -128,7 +128,7 @@ elif choice == "Add New Plant":
                 "Max W (m)": max_w, 
                 "Soil Type": soil,
                 "Light": light, 
-                "Low Phosphorous": = "✔" if low_phos else "",
+                "Low Phosphorous": "✅" if low_phos else "",
                 "Fertilizer": fert, 
                 "Flowering": ", ".join(flowering), 
                 "Notes": notes
