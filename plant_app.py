@@ -42,5 +42,5 @@ elif choice == "Log Growth":
 
 elif choice == "View Diary":
     st.subheader("Your Collection")
-    data = conn.read(worksheet="Plants")
+    data = conn.read()
     st.dataframe(data)
