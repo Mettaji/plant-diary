@@ -7,7 +7,7 @@ from datetime import datetime
 # ==========================================
 # 1. PAGE CONFIGURATION & CONNECTION
 # ==========================================
-st.set_page_config(page_title="WD Plant Diary", page_icon="🌿", layout="centered")
+st.set_page_config(page_title="WBD Plant Diary", page_icon="🌿", layout="centered")
 
 conn = st.connection("gsheets", type=GSheetsConnection)
 
