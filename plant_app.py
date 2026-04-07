@@ -67,7 +67,6 @@ elif choice == "Add New Plant":
     with st.form("new_plant_form", clear_on_submit=True):
         
         # --- IDENTITY & TAXONOMY ---
-        st.markdown("**Identity & Taxonomy**")
         col1, col2 = st.columns(2)
         with col1:
             name = st.text_input("Common Name", placeholder="e.g. Old Man Banksia")
