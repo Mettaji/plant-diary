@@ -94,7 +94,7 @@ elif choice == "Add New Plant":
 
 # --- OPTION 3: LOG GROWTH UPDATE ---
 elif choice == "Log Growth Update":
-    st.subheader("📸 Bi-Weekly Progress Photo")
+    st.subheader("📸 Monthly Progress Photo")
     
     try:
         df_plants = conn.read(worksheet="Plants")
