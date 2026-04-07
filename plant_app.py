@@ -17,19 +17,33 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 # ==========================================
 st.markdown("""
     <style>
+    /* 1. FORCE COLUMNS TO STAY SIDE-BY-SIDE ON MOBILE */
     [data-testid="column"] {
         width: 50% !important;
         flex: 1 1 50% !important;
         min-width: 50% !important;
     }
-    input::placeholder, textarea::placeholder {
+    
+    /* 2. FORCE THE HORIZONTAL LAYOUT IN THE PARENT CONTAINER */
+    [data-testid="stHorizontalBlock"] {
+        flex-direction: row !important;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+    }
+
+    /* 3. TARGET PLACEHOLDERS BY STREAMLIT'S INTERNAL DATA ATTRIBUTE */
+    input[data-testid="stWidgetLabel-placeholder"], 
+    .st-at::placeholder, 
+    textarea::placeholder,
+    input::placeholder {
         color: #d1d1d1 !important;
         opacity: 1 !important;
         -webkit-text-fill-color: #d1d1d1 !important;
     }
-    label {
-        font-size: 0.85rem !important;
-        font-weight: bold !important;
+
+    /* 4. TIGHTEN PADDING FOR MOBILE SCREENS */
+    .stNumberInput, .stTextInput {
+        padding-bottom: 0.5rem !important;
     }
     </style>
 """, unsafe_allow_html=True)
