@@ -148,7 +148,6 @@ elif choice == "Add New Plant":
         
 
         # --- FIELD NOTES ---
-        st.markdown("**Field Notes**")
         notes = st.text_area("Notes")
         
 
