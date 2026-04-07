@@ -81,17 +81,17 @@ elif choice == "Add New Plant":
         # --- IDENTITY & TAXONOMY ---
         col1, col2 = st.columns(2)
         with col1:
-            name = st.text_input("Common Name", placeholder="e.g. Old Man Banksia")
+            name = st.text_input("Common Name")
         with col2:
-            sci_name = st.text_input("Scientific Name", placeholder="e.g. Banksia serrata")
+            sci_name = st.text_input("Scientific Name")
         
 
         # --- PHYSICAL DIMENSIONS ---
         col3, col4 = st.columns(2)
         with col3:
-            max_h = st.number_input("Max H (m)", min_value=0.0, step=0.1)
+            max_h = st.number_input("Max H (m)", min_value=0.0, step=0.25)
         with col4:
-            max_w = st.number_input("Max W (m)", min_value=0.0, step=0.1)
+            max_w = st.number_input("Max W (m)", min_value=0.0, step=0.25)
         
 
         # --- ENVIRONMENTAL NEEDS ---
@@ -99,19 +99,19 @@ elif choice == "Add New Plant":
         with col5:
             soil = st.selectbox("Soil Type", ["Sandstone/Sandy", "Clay", "Loam", "Rocky/Shallow"])
         with col6:
-            light = st.select_slider("Light", options=["Shade", "Part", "Sun"])
+            light = st.select_slider("Light", options=["Shade", "Mostly shade", "Part shade", "Full Sun"])
         
-        fert = st.text_input("Fertilizer", value="Low Phosphorus (Native)")
+        fert = st.text_input("Fertilizer Req.", value="")
         
 
         # --- CHARACTERISTICS ---
         flowering = st.multiselect("Flowering Season(s)", ["Spring", "Summer", "Autumn", "Winter", "Year-round"])
-        habit = st.text_area("Growth Habits", placeholder="e.g. Bird attracting, fire-tolerant")
+        habit = st.text_area("Growth Habits")
         
 
         # --- FIELD NOTES ---
         st.markdown("**Field Notes**")
-        notes = st.text_area("Initial Planting Notes", placeholder="e.g. Located near the North tank")
+        notes = st.text_area("Notes")
 
         
         # --- SUBMIT LOGIC ---
