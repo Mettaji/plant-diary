@@ -44,11 +44,11 @@ if choice == "View Collection":
         <style>
         input::placeholder {
             color: #bdc3c7 !important; /* A light silver/grey */
-            opacity: 0.7;
+            opacity: 0.5;
         }
         textarea::placeholder {
             color: #bdc3c7 !important;
-            opacity: 0.7;
+            opacity: 0.5;
         }
         </style>
     """, unsafe_allow_html=True)
