@@ -128,6 +128,7 @@ elif choice == "Add New Plant":
                 "Max W (m)": max_w, 
                 "Soil Type": soil,
                 "Light": light, 
+                "Low Phosphorous": = "✔" if low_phos else ""
                 "Fertilizer": fert, 
                 "Flowering": ", ".join(flowering), 
                 "Notes": notes
