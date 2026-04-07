@@ -13,7 +13,7 @@ st.set_page_config(
 # 1. Establish connection to your Google Sheet
 conn = st.connection("gsheets", type=GSheetsConnection)
 
-st.title("🌿 Property Plant Diary")
+st.title("🌿 Wat Buddha Dhamma Plant Diary")
 
 # Navigation Sidebar
 menu = ["View Collection", "Add New Plant", "Log Growth Update"]
