@@ -4,6 +4,7 @@ import pandas as pd
 from datetime import datetime
 
 st.set_page_config(page_title="Wat Buddha Dhamma Plant Diary", page_icon="🌿")
+st.set_page_config(layout="centered", initial_sidebar_state="collapsed")
 
 # Connect to Google Sheets
 conn = st.connection("gsheets", type=GSheetsConnection)
