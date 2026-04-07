@@ -161,9 +161,9 @@ elif choice == "Add New Plant":
 
            # 1. Handle the Image Upload FIRST
             if uploaded_file is not None:
-                  image_link = upload_to_drive(uploaded_file, '1ko9MzM8FdaEGEu2KmgaZObYcrEuKDOKY')
-              else:
-                  image_link = "No Image"
+               image_link = upload_to_drive(uploaded_file, '1ko9MzM8FdaEGEu2KmgaZObYcrEuKDOKY')
+            else:
+               image_link = "No Image"
            
             plant_id = datetime.now().strftime("%Y%m%d%H%M")
             new_row = pd.DataFrame([{
