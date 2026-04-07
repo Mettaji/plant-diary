@@ -13,37 +13,35 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 
 
 # ==========================================
-# 2. CUSTOM CSS (Mobile UI & Styling)
+# 2. CUSTOM CSS (Universal Side-by-Side)
 # ==========================================
 st.markdown("""
     <style>
-    /* 1. FORCE COLUMNS TO STAY SIDE-BY-SIDE ON MOBILE */
+    /* 1. FORCE COLUMNS TO STAY 50/50 ON ALL SCREENS */
     [data-testid="column"] {
         width: 50% !important;
         flex: 1 1 50% !important;
         min-width: 50% !important;
     }
-    
-    /* 2. FORCE THE HORIZONTAL LAYOUT IN THE PARENT CONTAINER */
+
+    /* 2. PREVENT WRAPPING (This keeps them on one line) */
     [data-testid="stHorizontalBlock"] {
         flex-direction: row !important;
         display: flex !important;
         flex-wrap: nowrap !important;
+        gap: 10px !important; /* Tightens the space between them */
     }
 
-    /* 3. TARGET PLACEHOLDERS BY STREAMLIT'S INTERNAL DATA ATTRIBUTE */
-    input[data-testid="stWidgetLabel-placeholder"], 
-    .st-at::placeholder, 
-    textarea::placeholder,
-    input::placeholder {
+    /* 3. PLACEHOLDER COLOR (Targeting all potential classes) */
+    input::placeholder, textarea::placeholder, .st-at::placeholder {
         color: #d1d1d1 !important;
         opacity: 1 !important;
         -webkit-text-fill-color: #d1d1d1 !important;
     }
 
-    /* 4. TIGHTEN PADDING FOR MOBILE SCREENS */
-    .stNumberInput, .stTextInput {
-        padding-bottom: 0.5rem !important;
+    /* 4. REFINING INPUT BOXES */
+    .stNumberInput input, .stTextInput input {
+        color: #31333F !important; /* Ensures your typed text is dark */
     }
     </style>
 """, unsafe_allow_html=True)
