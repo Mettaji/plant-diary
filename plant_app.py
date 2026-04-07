@@ -102,6 +102,9 @@ elif choice == "Add New Plant":
             light = st.select_slider("Light", options=["Shade", "Mostly shade", "Part shade", "Full Sun"])
         
         fert = st.text_input("Fertilizer Req.", value="")
+
+        # Create the binary tick box
+        low_phos = st.checkbox("Low Phosphorus Requirement", value=False)
         
 
         # --- CHARACTERISTICS ---
