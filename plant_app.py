@@ -117,9 +117,17 @@ elif choice == "Add New Plant":
         notes = st.text_area("Notes")
         
 
-        # --- IMAGE UPLOAD SECTION ---
-        st.markdown("**Plant Gallery**")
-        uploaded_file = st.file_uploader("Upload photo", type=["jpg", "jpeg", "png"])
+     # 1. Inside your form (the uploader)
+        with st.form("new_plant_form", clear_on_submit=True):
+            # ... all your existing fields ...
+            uploaded_file = st.file_uploader("Upload a photo", type=["jpg", "jpeg", "png"])
+            
+            submit = st.form_submit_button("Save to Diary")
+            if submit:
+                # Save your data to the Google Sheet here
+                if uploaded_file:
+                    st.session_state['last_upload'] = uploaded_file
+                st.success("Data saved!")
 
         
         # --- SUBMIT LOGIC ---
@@ -143,8 +151,11 @@ elif choice == "Add New Plant":
             st.success(f"Details for {name} saved to session!")
 
   # Optional: Show a small preview of the image once selected
-        if uploaded_file is not None:
-            st.image(uploaded_file, caption="Preview", width=200)
+       # 2. Outside/Below the form (the preview)
+            if 'last_upload' in st.session_state and st.session_state['last_upload'] is not None:
+                st.write("---")
+                st.markdown("**Last Uploaded Preview:**")
+                st.image(st.session_state['last_upload'], width=300)
 
 
 # ------------------------------------------
