@@ -4,6 +4,40 @@ import pandas as pd
 from datetime import datetime
 
 
+from googleapiclient.discovery import build
+from google.oauth2 import service_account
+from googleapiclient.http import MediaIoBaseUpload
+import io
+
+def upload_to_drive(file, folder_id):
+    # Path to the JSON key you downloaded
+    SERVICE_ACCOUNT_FILE = 'path/to/your/key.json' 
+    SCOPES = ['https://www.googleapis.com/auth/drive.file']
+
+    creds = service_account.Credentials.from_service_account_file(
+        SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    
+    drive_service = build('drive', 'v3', credentials=creds)
+
+    file_metadata = {
+        'name': f"{datetime.now().strftime('%Y%m%d_%H%M')}_plant.jpg",
+        'parents': [folder_id]
+    }
+    
+    # Wrap the Streamlit file in an IO buffer
+    media = MediaIoBaseUpload(io.BytesIO(file.read()), 
+                              mimetype='image/jpeg', 
+                              resumable=True)
+    
+    uploaded_file = drive_service.files().create(
+        body=file_metadata, 
+        media_body=media, 
+        fields='id, webViewLink'
+    ).execute()
+
+    return uploaded_file.get('webViewLink') # This is the URL for your spreadsheet
+
+
 # ==========================================
 # 1. PAGE CONFIGURATION & CONNECTION
 # ==========================================
@@ -136,6 +170,16 @@ elif choice == "Add New Plant":
                 "Fertilizer": fert, 
                 "Flowering": ", ".join(flowering), 
                 "Notes": notes
+
+                if uploaded_file is not None:
+                    # Replace 'YOUR_FOLDER_ID' with the long string of letters/numbers 
+                    # found in the URL of your Google Drive folder
+                    image_link = upload_to_drive(uploaded_file, '1ko9MzM8FdaEGEu2KmgaZObYcrEuKDOKY')
+                else:
+                    image_link = "No Image"
+
+# Add this to your data dictionary
+"Photo Link": image_link,
             }])
             
             st.write("Data Preview:", new_row)
@@ -149,6 +193,9 @@ elif choice == "Add New Plant":
                 st.write("---")
                 st.markdown("**Last Uploaded Preview:**")
                 st.image(st.session_state['last_upload'], width=300)
+
+
+
 
 
 # ------------------------------------------
