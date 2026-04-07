@@ -123,7 +123,7 @@ elif choice == "Add New Plant":
 
         # Optional: Show a small preview of the image once selected
         if uploaded_file is not None:
-        st.image(uploaded_file, caption="Preview", width=200)
+            st.image(uploaded_file, caption="Preview", width=200)
 
         
         # --- SUBMIT LOGIC ---
