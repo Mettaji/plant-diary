@@ -141,6 +141,11 @@ elif choice == "Add New Plant":
                 "Photo Link": image_link  # Now we add the result here
 
             }])
+            conn = st.connection("gsheets", type=GSheetsConnection)
+            existing_data = conn.read(ttl=0) # ttl=0 ensures it gets the freshest data
+            updated_df = pd.concat([existing_data, new_row], ignore_index=True)
+            st.write("Pushing data...")
+            conn.update(data=updated_df)
             
             st.write("Data Preview:", new_row)
             st.success(f"Details for {name} saved to session!")
