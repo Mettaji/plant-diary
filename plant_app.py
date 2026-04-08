@@ -50,7 +50,7 @@ st.title("🌿 WBD Plant Diary")
 st.write("---")
 
 menu = ["View Collection", "Add New Plant", "Log Growth Update"]
-choice = st.radio(menu, index=0)
+choice = st.radio("Select a Page:", menu, index=0)
 
 
 # ------------------------------------------
