@@ -76,35 +76,35 @@ if choice == "View Collection":
             
             # 2. Display with row numbers (index) hidden
 
-        st.dataframe(
-                display_df,
-                use_container_width=True,
-                hide_index=True,
-                column_config={
-                    "Common Name": st.column_config.TextColumn(width="medium"), # Fixed: Added missing comma
-                    "Scientific Name": st.column_config.TextColumn(width="medium"),
-                    "Notes": st.column_config.TextColumn(width="large"),
-                    "Max H": st.column_config.TextColumn(width="small"),
-                    "Max W": st.column_config.TextColumn(width="small"),
-                    "Soil Type": st.column_config.TextColumn(width="small"),
-                    "Light": st.column_config.TextColumn(width="medium"),
-                    "Low Phosphorous": st.column_config.TextColumn(width="small"),
-                    "Fertilizer": st.column_config.TextColumn(width="medium"),
-                    "Flowering": st.column_config.TextColumn(width="small"),
-                    "Photo Link": st.column_config.ImageColumn(                # Merged: No second 'column_config' label
-                        "Preview", 
-                        help="Thumbnail of the specimen",
-                        width="medium" 
-                    )
-                } # This curly bracket closes the 'column_config' dictionary
-            ) # This parenthesis closes the 'st.dataframe' function
+            st.dataframe(
+                    display_df,
+                    use_container_width=True,
+                    hide_index=True,
+                    column_config={
+                        "Common Name": st.column_config.TextColumn(width="medium"), # Fixed: Added missing comma
+                        "Scientific Name": st.column_config.TextColumn(width="medium"),
+                        "Notes": st.column_config.TextColumn(width="large"),
+                        "Max H": st.column_config.TextColumn(width="small"),
+                        "Max W": st.column_config.TextColumn(width="small"),
+                        "Soil Type": st.column_config.TextColumn(width="small"),
+                        "Light": st.column_config.TextColumn(width="medium"),
+                        "Low Phosphorous": st.column_config.TextColumn(width="small"),
+                        "Fertilizer": st.column_config.TextColumn(width="medium"),
+                        "Flowering": st.column_config.TextColumn(width="small"),
+                        "Photo Link": st.column_config.ImageColumn(                # Merged: No second 'column_config' label
+                            "Preview", 
+                            help="Thumbnail of the specimen",
+                            width="medium" 
+                        )
+                    } # This curly bracket closes the 'column_config' dictionary
+                ) # This parenthesis closes the 'st.dataframe' function
 
 
         
 
         
         else:
-        st.info("The diary is currently empty.")
+            st.info("The diary is currently empty.")
             
     except Exception as e:
         # It's often helpful to see the actual error while debugging
