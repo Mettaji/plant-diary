@@ -46,11 +46,11 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 # ==========================================
 # 3. MAIN APP INTERFACE
 # ==========================================
-st.title("🌿 Property Plant Diary")
+st.title("🌿 WBD Plant Diary")
 st.write("---")
 
 menu = ["View Collection", "Add New Plant", "Log Growth Update"]
-choice = st.sidebar.selectbox("Menu", menu)
+choice = st.radio(menu)
 
 
 # ------------------------------------------
