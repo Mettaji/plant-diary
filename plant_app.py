@@ -34,6 +34,9 @@ def upload_to_imgbb(file):
         return response.json()["data"]["url"]
     else:
         return "Upload Error"
+    
+
+
 
 # ==========================================
 # 1. PAGE CONFIGURATION & CONNECTION
@@ -84,11 +87,11 @@ if choice == "View Collection":
                         "Common Name": st.column_config.TextColumn(width="medium"), # Fixed: Added missing comma
                         "Scientific Name": st.column_config.TextColumn(width="medium"),
                         "Notes": st.column_config.TextColumn(width="large"),
-                        "Max H": st.column_config.TextColumn(width="small"),
-                        "Max W": st.column_config.TextColumn(width="small"),
+                        "Max H": st.column_config.TextColumn("H",width="small"),
+                        "Max W": st.column_config.TextColumn("W", width="small"),
                         "Soil Type": st.column_config.TextColumn(width="small"),
                         "Light": st.column_config.TextColumn(width="medium"),
-                        "Low Phosphorous": st.column_config.TextColumn(width="small"),
+                        "Low Phosphorous": st.column_config.TextColumn("Low P",width="small"),
                         "Fertilizer": st.column_config.TextColumn(width="medium"),
                         "Flowering": st.column_config.TextColumn(width="small"),
                         "Photo Link": st.column_config.ImageColumn(                # Merged: No second 'column_config' label
