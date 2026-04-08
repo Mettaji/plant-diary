@@ -72,10 +72,39 @@ if choice == "View Collection":
             # errors='ignore' ensures it won't crash if "ID" is missing or renamed
             display_df = df.drop(columns=["ID"], errors='ignore')
 
-            use_container_width=True,
+        
             
             # 2. Display with row numbers (index) hidden
-            st.dataframe(display_df, use_container_width=True, hide_index=True)
+            
+            st.dataframe(
+                display_df,
+                use_container_width=True,
+                hide_index=True,
+                column_config={
+                    "Common Name": st.column_config.TextColumn(width="medium")
+                    "Scientific Name": st.column_config.TextColumn(width="medium"),
+                    "Notes": st.column_config.TextColumn(width="large"),
+                    "Max H": st.column_config.TextColumn(width="small"),
+                    "Max W": st.column_config.TextColumn(width="small"),
+                    "Soil Type": st.column_config.TextColumn(width="small"),
+                    "Light": st.column_config.TextColumn(width="medium"),
+                    "Low Phosphorous": st.column_config.TextColumn(width="small"),
+                    "Fertilizer": st.column_config.TextColumn(width="medium"),
+                    "Flowering": st.column_config.TextColumn(width="small"),
+                    
+                    column_config={
+                    "Photo Link": st.column_config.ImageColumn(
+                        "Preview", 
+                        help="Thumbnail of the specimen",
+                        width="medium" # Options: "small", "medium", or "large"
+                    )
+                }
+            )
+
+
+        
+
+        
         else:
             st.info("The diary is currently empty.")
             
