@@ -14,6 +14,8 @@ import io
 import requests
 import base64
 
+st.set_page_config(layout="wide")
+
 def upload_to_imgbb(file):
     api_key = st.secrets["IMGBB_API_KEY"]
     url = "https://api.imgbb.com/1/upload"
@@ -69,6 +71,8 @@ if choice == "View Collection":
             # 1. Remove the ID column for a cleaner look
             # errors='ignore' ensures it won't crash if "ID" is missing or renamed
             display_df = df.drop(columns=["ID"], errors='ignore')
+
+            use_container_width=True,
             
             # 2. Display with row numbers (index) hidden
             st.dataframe(display_df, use_container_width=True, hide_index=True)
