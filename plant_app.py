@@ -28,7 +28,7 @@ def upload_to_drive(file, folder_id):
     # Wrap the Streamlit file in an IO buffer
     media = MediaIoBaseUpload(io.BytesIO(file.read()), 
                               mimetype='image/jpeg', 
-                              resumable=True)
+                              resumable=False)
     
     uploaded_file = drive_service.files().create(
         body=file_metadata, 
