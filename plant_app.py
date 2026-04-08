@@ -104,7 +104,7 @@ if choice == "View Collection":
 
         
         else:
-            st.info("The diary is currently empty.")
+        st.info("The diary is currently empty.")
             
     except Exception as e:
         # It's often helpful to see the actual error while debugging
