@@ -28,12 +28,13 @@ def upload_to_drive(file, folder_id):
     # Wrap the Streamlit file in an IO buffer
     media = MediaIoBaseUpload(io.BytesIO(file.read()), 
                               mimetype='image/jpeg', 
-                              resumable=False)
+                              resumable=True)
     
     uploaded_file = drive_service.files().create(
         body=file_metadata, 
         media_body=media, 
-        fields='id, webViewLink'
+        fields='id, webViewLink',
+        supportsAllDrives=True
     ).execute()
 
     return uploaded_file.get('webViewLink') # This is the URL for your spreadsheet
