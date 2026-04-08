@@ -76,12 +76,12 @@ if choice == "View Collection":
             
             # 2. Display with row numbers (index) hidden
             
-            st.dataframe(
+           st.dataframe(
                 display_df,
                 use_container_width=True,
                 hide_index=True,
                 column_config={
-                    "Common Name": st.column_config.TextColumn(width="medium")
+                    "Common Name": st.column_config.TextColumn(width="medium"), # Fixed: Added missing comma
                     "Scientific Name": st.column_config.TextColumn(width="medium"),
                     "Notes": st.column_config.TextColumn(width="large"),
                     "Max H": st.column_config.TextColumn(width="small"),
@@ -91,15 +91,13 @@ if choice == "View Collection":
                     "Low Phosphorous": st.column_config.TextColumn(width="small"),
                     "Fertilizer": st.column_config.TextColumn(width="medium"),
                     "Flowering": st.column_config.TextColumn(width="small"),
-                    
-                    column_config={
-                    "Photo Link": st.column_config.ImageColumn(
+                    "Photo Link": st.column_config.ImageColumn(                # Merged: No second 'column_config' label
                         "Preview", 
                         help="Thumbnail of the specimen",
-                        width="medium" # Options: "small", "medium", or "large"
+                        width="medium" 
                     )
-                }
-            )
+                } # This curly bracket closes the 'column_config' dictionary
+            ) # This parenthesis closes the 'st.dataframe' function
 
 
         
