@@ -12,11 +12,11 @@ import io
 def upload_to_drive(file, folder_id):
    # 1. Pull the credentials directly from Streamlit Secrets
     creds_dict = st.secrets["google_drive"]
-    SCOPES = ['https://www.googleapis.com/auth/drive.file']
+    SCOPES = ['https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive']
 
-    # 2. Create credentials from the dictionary instead of a file
-    creds = service_account.Credentials.from_service_account_info(
-        creds_dict, scopes=SCOPES)
+    
+    creds = service_account.Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
+    drive_service = build('drive', 'v3', credentials=creds)
     
     drive_service = build('drive', 'v3', credentials=creds)
 
@@ -30,12 +30,31 @@ def upload_to_drive(file, folder_id):
                               mimetype='image/jpeg', 
                               resumable=True)
     
-    uploaded_file = drive_service.files().create(
+    # 1. Create the file
+    file_obj = drive_service.files().create(
         body=file_metadata, 
         media_body=media, 
-        fields='id, webViewLink',
-        supportsAllDrives=True
+        fields='id, webViewLink'
     ).execute()
+
+    file_id = file_obj.get('id')
+
+    # 2. IMMEDIATELY transfer ownership to your personal email
+    # Replace with your actual gmail address
+    user_permission = {
+        'type': 'user',
+        'role': 'owner',
+        'emailAddress': 'davkingston@gmail.com' 
+    }
+
+    drive_service.permissions().create(
+        fileId=file_id,
+        body=user_permission,
+        transferOwnership=True,
+        fields='id'
+    ).execute()
+
+    return file_obj.get('webViewLink')
 
     return uploaded_file.get('webViewLink') # This is the URL for your spreadsheet
 
