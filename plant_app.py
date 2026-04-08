@@ -84,23 +84,23 @@ if choice == "View Collection":
                     use_container_width=True,
                     hide_index=True,
                     column_config={
-                        "Common Name": st.column_config.TextColumn(width="medium"), # Fixed: Added missing comma
+                        "Common Name": st.column_config.TextColumn(width="medium"), 
                         "Scientific Name": st.column_config.TextColumn(width="medium"),
                         "Notes": st.column_config.TextColumn(width="large"),
-                        "Max H": st.column_config.TextColumn("H",width="small"),
-                        "Max W": st.column_config.TextColumn("W", width="small"),
+                        "Max H": st.column_config.TextColumn("H (m)",width="small"),
+                        "Max W": st.column_config.TextColumn("W (m)", width="small"),
                         "Soil Type": st.column_config.TextColumn(width="small"),
                         "Light": st.column_config.TextColumn(width="medium"),
                         "Low Phosphorous": st.column_config.TextColumn("Low P",width="small"),
                         "Fertilizer": st.column_config.TextColumn(width="medium"),
                         "Flowering": st.column_config.TextColumn(width="small"),
-                        "Photo Link": st.column_config.ImageColumn(                # Merged: No second 'column_config' label
+                        "Photo Link": st.column_config.ImageColumn(                
                             "Preview", 
                             help="Thumbnail of the specimen",
                             width="medium" 
                         )
                     } # This curly bracket closes the 'column_config' dictionary
-                ) # This parenthesis closes the 'st.dataframe' function
+                ) 
 
 
         
