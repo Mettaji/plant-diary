@@ -9,55 +9,29 @@ from google.oauth2 import service_account
 from googleapiclient.http import MediaIoBaseUpload
 import io
 
-def upload_to_drive(file, folder_id):
-   # 1. Pull the credentials directly from Streamlit Secrets
-    creds_dict = st.secrets["google_drive"]
-    SCOPES = ['https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive']
 
-    
-    creds = service_account.Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
-    drive_service = build('drive', 'v3', credentials=creds)
-    
-    drive_service = build('drive', 'v3', credentials=creds)
 
-    file_metadata = {
-        'name': f"{datetime.now().strftime('%Y%m%d_%H%M')}_plant.jpg",
-        'parents': [folder_id]
+import requests
+import base64
+
+def upload_to_imgbb(file):
+    api_key = st.secrets["IMGBB_API_KEY"]
+    url = "https://api.imgbb.com/1/upload"
+    
+    # Convert the uploaded file to a format ImgBB understands
+    img_data = base64.b64encode(file.read()).decode('utf-8')
+    
+    payload = {
+        "key": api_key,
+        "image": img_data,
     }
     
-    # Wrap the Streamlit file in an IO buffer
-    media = MediaIoBaseUpload(io.BytesIO(file.read()), 
-                              mimetype='image/jpeg', 
-                              resumable=True)
+    response = requests.post(url, payload)
     
-    # 1. Create the file
-    file_obj = drive_service.files().create(
-        body=file_metadata, 
-        media_body=media, 
-        fields='id, webViewLink'
-    ).execute()
-
-    file_id = file_obj.get('id')
-
-    # 2. IMMEDIATELY transfer ownership to your personal email
-    # Replace with your actual gmail address
-    user_permission = {
-        'type': 'user',
-        'role': 'owner',
-        'emailAddress': 'davkingston@gmail.com' 
-    }
-
-    drive_service.permissions().create(
-        fileId=file_id,
-        body=user_permission,
-        transferOwnership=True,
-        fields='id'
-    ).execute()
-
-    return file_obj.get('webViewLink')
-
-    return uploaded_file.get('webViewLink') # This is the URL for your spreadsheet
-
+    if response.status_code == 200:
+        return response.json()["data"]["url"]
+    else:
+        return "Upload Error"
 
 # ==========================================
 # 1. PAGE CONFIGURATION & CONNECTION
@@ -147,7 +121,7 @@ elif choice == "Add New Plant":
 
            # 1. Handle the Image Upload FIRST
             if uploaded_file is not None:
-               image_link = upload_to_drive(uploaded_file, '1ko9MzM8FdaEGEu2KmgaZObYcrEuKDOKY')
+               image_link = upload_to_imgbb(uploaded_file)
             else:
                image_link = "No Image"
            
