@@ -155,7 +155,6 @@ elif choice == "Add New Plant":
                 st.image(st.session_state['last_upload'], width=300)
 
 
-st.write(f"Available keys: {list(st.secrets.keys())}")
 
 
 # ------------------------------------------
