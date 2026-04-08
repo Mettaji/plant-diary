@@ -56,15 +56,28 @@ choice = st.sidebar.radio("", menu, index=0)
 # ------------------------------------------
 # OPTION: VIEW COLLECTION
 # ------------------------------------------
+
+
 if choice == "View Collection":
     st.subheader("📋 Current Species Collection")
     
     try:
-        df = conn.read()
-        st.dataframe(df, use_container_width=True)
-    except:
+        # Fetch fresh data
+        df = conn.read(ttl=0)
+        
+        if not df.empty:
+            # 1. Remove the ID column for a cleaner look
+            # errors='ignore' ensures it won't crash if "ID" is missing or renamed
+            display_df = df.drop(columns=["ID"], errors='ignore')
+            
+            # 2. Display with row numbers (index) hidden
+            st.dataframe(display_df, use_container_width=True, hide_index=True)
+        else:
+            st.info("The diary is currently empty.")
+            
+    except Exception as e:
+        # It's often helpful to see the actual error while debugging
         st.info("Diary is empty or connection is pending.")
-
 
 # ------------------------------------------
 # OPTION: ADD NEW PLANT
