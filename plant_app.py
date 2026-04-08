@@ -75,8 +75,8 @@ if choice == "View Collection":
         
             
             # 2. Display with row numbers (index) hidden
-            
-         st.dataframe(
+
+        st.dataframe(
                 display_df,
                 use_container_width=True,
                 hide_index=True,
